@@ -1,0 +1,13 @@
+{
+  "name": "ws-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node ws-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
