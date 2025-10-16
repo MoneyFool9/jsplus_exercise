@@ -1,3 +1,5 @@
+import { render } from "./render";
+
 const states = [];
 const stateSetters = [];
 
@@ -38,10 +40,3 @@ export function useState(initialState) {
   ]
 }
 
-async function render() {
-  const App = (await import('./App.jsx')).default;
-  const root = (await import('./main.jsx')).default;
-
-  stateIndex = 0;
-  root.render(<App />);
-}

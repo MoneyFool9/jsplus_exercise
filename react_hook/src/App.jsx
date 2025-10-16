@@ -1,11 +1,13 @@
 const {
-  // useState,
-  // useReducer,
+  useState,
+  useReducer,
   useEffect
 } = React;
 
-import { useState } from "./useState";
-import { useReducer } from "./useReducer";
+// import { useEffect } from "./useEffect";
+// import { useState } from "./useState";
+// import { useReducer } from "./useReducer";
+import Optimazation from "./optimazation";
 /**
  *  data => state
  *  React => view library
@@ -85,18 +87,30 @@ export default function App() {
     }
   }, [])
 
+  // const OptimazationMemo = React.memo(Optimazation);
+
   return (
 		<>
-      <h1>{state}</h1>
-      <h1>{count}</h1>
-      {/* <button onClick={() => setState(state + 1)}>+</button> */}
-      
-      <div className="button-group">
-        <button onClick={() => dispatch({ type: 'PLUS', payload: 1 })}>+</button>
-        <button onClick={() => dispatch({ type: 'MINUS', payload: 1 })}>-</button>
-        <button onClick={() => dispatch({ type: 'MUL', payload: 2 })}>*</button>
-        <button onClick={() => dispatch({ type: 'DIV', payload: 2 })}>/</button>
-      </div>
+			<h1>{state}</h1>
+			<h1>{count}</h1>
+			{/* <button onClick={() => setState(state + 1)}>+</button> */}
+
+			<div className="button-group">
+				<button onClick={() => dispatch({ type: "PLUS", payload: 1 })}>
+					+
+				</button>
+				<button onClick={() => dispatch({ type: "MINUS", payload: 1 })}>
+					-
+				</button>
+				<button onClick={() => dispatch({ type: "MUL", payload: 2 })}>
+					*
+				</button>
+				<button onClick={() => dispatch({ type: "DIV", payload: 2 })}>
+					/
+				</button>
+			</div>
+
+			<Optimazation />
 		</>
   );
 }
