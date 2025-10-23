@@ -1,13 +1,17 @@
 const {
   useState,
   useReducer,
-  useEffect
+  useEffect,
+  useMemo,
+  memo,
+  useCallback
 } = React;
 
 // import { useEffect } from "./useEffect";
 // import { useState } from "./useState";
 // import { useReducer } from "./useReducer";
 import Optimazation from "./optimazation";
+import _RefFoo from "./_Ref";
 /**
  *  data => state
  *  React => view library
@@ -55,19 +59,19 @@ export default function App() {
    *  
    */
   useEffect(() => {
-    console.log('每次render都会执行');
+    // console.log('每次render都会执行');
   })
 
   useEffect(() => {
-    console.log('只会在第一次render执行');
+    // console.log('只会在第一次render执行');
   }, [])
 
   useEffect(() => {
-    console.log('只有在state或者count变化的时候才会执行');
+    // console.log('只有在state或者count变化的时候才会执行');
 
     // 清除副作用逻辑
     return () => {
-      console.log('组件卸载，或者下一次执行effect之前会执行');
+      // console.log('组件卸载，或者下一次执行effect之前会执行');
     }
   }, [state, count])
 
@@ -76,18 +80,38 @@ export default function App() {
     console.log('UseEffect');
 
     t = setInterval(() => {
-      console.log('定时器');
+      // console.log('定时器');
       setState(s => s + 1)
     }, 1000)
 
     return () => {
       clearInterval(t);
       t = null;
-      console.log('清除定时器');
+      // console.log('清除定时器');
     }
   }, [])
 
   // const OptimazationMemo = React.memo(Optimazation);
+
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
+
+  // Child 组件每次父组件更新都会重新渲染
+  // Child 组件不依赖 count1, 但是每次 count1 更新，Child 组件也会更新，相反，count1不更新，组件就没必要再渲染
+  const Child = memo(props => {
+		console.log("Child render");
+		return (
+			<>
+				<h1>count2: {props.childData.count2}</h1>
+				<button onClick={props.setCount2}>count2 +</button>
+			</>
+		);
+  });
+
+   const childData = useMemo(() => ({ count2 }), [count2]);
+   const doubleCount1 = useMemo(() => count1 * 2, [count1]);
+
+   const cbSetCount2 = useCallback(() => setCount2(count2 + 1), []);  
 
   return (
 		<>
@@ -111,6 +135,15 @@ export default function App() {
 			</div>
 
 			<Optimazation />
+			<h1>{count1}</h1>
+			<h1>{doubleCount1}</h1>
+			<button onClick={() => setCount1(count1 + 1)}>count1 +</button>
+			<Child
+				childData={childData}
+				setCount2={cbSetCount2}
+      />
+      
+      <_RefFoo />
 		</>
   );
 }

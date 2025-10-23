@@ -1,7 +1,8 @@
 const {
   useState,
   memo,
-  useMemo
+  useMemo,
+  useCallback
 } = React;
 
 /**
@@ -17,7 +18,7 @@ export default function Optimazation() {
   // Child 组件每次父组件更新都会重新渲染
   // Child 组件不依赖 count1, 但是每次 count1 更新，Child 组件也会更新，相反，count1不更新，组件就没必要再渲染
   const Child = memo((props) => {
-    console.log('Child render');
+    // console.log('Child render');
     return (
 		<>
 			<h1>count2: {props.childData.count2}</h1>

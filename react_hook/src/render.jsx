@@ -1,6 +1,7 @@
 import { resetCallbackIndex } from "./useCallback.jsx";
 import { resetEffectIndex } from "./useEffect.jsx";
 import { resetMemoIndex } from "./useMemo.jsx";
+import { resetRefIndex } from "./useRef.jsx";
 
 export async function render() {
 	const App = (await import("./App.jsx")).default;
@@ -9,6 +10,7 @@ export async function render() {
 	stateIndex = 0;
 	resetEffectIndex();
 	resetCallbackIndex();
-	resetMemoIndex();
+  resetMemoIndex();
+  resetRefIndex();
 	root.render(<App />);
 }
