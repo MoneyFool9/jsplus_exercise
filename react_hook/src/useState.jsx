@@ -40,3 +40,6 @@ export function useState(initialState) {
   ]
 }
 
+export function resetStateIndex() { 
+  stateIndex = 0;
+}
